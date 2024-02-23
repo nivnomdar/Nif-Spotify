@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import { BiSearch } from "react-icons/bi";
 import { HiHome } from "react-icons/hi";
-import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { twMerge } from "tailwind-merge";
 import Button from "./Button";
 import useAuthModal from "@/hooks/useAuthModal";
@@ -23,7 +22,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const router = useRouter();
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
-
+  // console.log(user);
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
 
@@ -54,9 +53,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             items-center 
             justify-center
             hover:opacity-75
-            transition">
-            <RxCaretLeft className="text-white" size={35} />
-          </button>
+            transition"></button>
           <button
             onClick={() => router.forward()}
             className="rounded-full 
@@ -64,18 +61,24 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           items-center 
           justify-center
           hover:opacity-75
-          transition">
-            <RxCaretRight className="text-white" size={35} />
-          </button>
+          transition"></button>
         </div>
 
         {/* mobile view */}
         <div className="flex md:hidden gap-x-2 items-center">
           <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition">
-            <HiHome className="text-black" size={20} />
+            <HiHome
+              className="text-black"
+              size={20}
+              onClick={() => router.push("/")}
+            />
           </button>
           <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition">
-            <BiSearch className="text-black" size={20} />
+            <BiSearch
+              className="text-black"
+              size={20}
+              onClick={() => router.push("/search")}
+            />
           </button>
         </div>
         <div className="flex justify-between items-center gap-x-4">
